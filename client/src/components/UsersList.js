@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+//import axios from "axios"
 import UserCard from "./UserCard";
 import "../App.css";
 
@@ -10,8 +11,8 @@ const UsersList = function () {
         axiosWithAuth()
             .get('/api/users')
             .then(response => {
-                console.log(response);
-                setUsers(response);
+                console.log(response.data);
+                setUsers(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -20,7 +21,7 @@ const UsersList = function () {
 
     return (
         <div className="users">
-            {users.map((user, key) => {
+                       {users.map((user, key) => {
                 return (
                     <UserCard
                         user={user}

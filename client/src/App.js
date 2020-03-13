@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-//import PrivateRoute from './utils/PrivateRoute';
 
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -10,8 +9,6 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>Users</h1>
-
       <Router>
         <Link className="register-link" to="/">Register</Link>
         <Link className="login-link" to="/login">Login</Link>

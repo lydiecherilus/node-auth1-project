@@ -1,17 +1,15 @@
-const bcrypt = require("bcryptjs")
-const restrict = require('../middleware/restrict.js')
-
-const router = require('express').Router();
-
+const express = require("express")
+const { restrict } = require("../middleware/restrict")
 const Users = require('./users-model.js');
 
+const router = express.Router();
 
 router.get('/', restrict(), (req, res) => {
-  Users.find()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => res.send(err));
-});
+     Users.find()
+      .then(users => {
+        res.json(users);
+      })
+      .catch(err => res.send(err));
+  });
 
-module.exports = router;
+  module.exports = router;

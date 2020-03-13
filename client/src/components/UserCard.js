@@ -5,7 +5,7 @@ const UserCard = props => {
     console.log(props)
     return (
         <div className="usercard">
-            <h3>Username: {props.username}</h3>
+            <h3>Username: {props.user.username}</h3>
         </div>
     )
 }

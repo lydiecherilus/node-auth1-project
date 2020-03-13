@@ -28,6 +28,7 @@ router.post('/login', async (req, res, next) => {
     const passwordValid = await bcrypt.compare(password, user.password)
 
     if (user && passwordValid) {
+      req.session.user = user.username
       res.status(200).json({ message: `Welcome ${user.username}!` });
     } else {
       res.status(401).json({ message: 'You shall not pass!' });
@@ -35,6 +36,17 @@ router.post('/login', async (req, res, next) => {
   } catch (error) {
     next(err)
   }
+})
+
+// Lougout
+router.get("/logout", (req, res, next) => {
+	req.session.destroy((err)=> {
+		if (err) {
+			next(err)
+		} else {
+			res.json({ message: "bye" })
+		}
+	})
 })
 
 module.exports = router;

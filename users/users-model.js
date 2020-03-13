@@ -9,7 +9,7 @@ module.exports = {
 };
 
 async function add(user) {
-    user.password = await bcrypt.hash(user.password, 15)
+    user.password = await bcrypt.hash(user.password, 3)
       const [id] = await db("users").insert(user)
       return findById(id)
   }

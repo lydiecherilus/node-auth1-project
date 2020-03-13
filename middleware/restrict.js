@@ -1,27 +1,19 @@
-const bcrypt = require("bcryptjs")
-const Users = require('../users/users-model.js');
+const sessions = {}
 
 function restrict() {
-    const authError = { message: "You shall not pass!" }
-    return async (req, res, next) => {
-        try {
-            const { username, password } = req.headers
-            if (!username || !password) {
-                return res.status(401).json(authError)
-            }
-            const user = await Users.findBy({ username }).first()
-            if (!user) {
-                return res.status(401).json(authError)
-            }
-            const passwordValid = await bcrypt.compare(password, user.password)
-            if (!passwordValid) {
-                return res.status(401).json(authError)
-            }
-            next()
-        } catch (err) {
-            next(err)
-        }
-    }
+	return async (req, res, next) => {
+		try {
+			if (!req.session || !req.session.user) {
+				return res.status(401).json({ message: "You shall not pass!" })
+				}
+			next()
+		} catch (err) {
+			next(err)
+		}
+	}
 }
 
-module.exports = restrict
+module.exports = {
+	sessions,
+	restrict
+}
